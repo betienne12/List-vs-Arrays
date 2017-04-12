@@ -13,9 +13,10 @@ namespace list_v_Arrays
         static void Main(string[] args)
         {
             string line;
-            System.IO.StreamReader file = new System.IO.StreamReader("C:\\Users\\Brian\\Desktop\\dictionaries\\1k.txt");
+            string file_size = "test";  //test, 1k, 10k, 50k, 100k
+             System.IO.StreamReader file = new System.IO.StreamReader("C:\\Users\\Brian\\Desktop\\dictionaries\\"+ file_size+ ".txt");
             LinkedList<string> linked = new LinkedList<string>();
-            Array[] array;
+            string [] array = new string[4];
             List<string> linked2 = new List<string>();
             Stopwatch sw = new Stopwatch();
 
@@ -88,6 +89,10 @@ namespace list_v_Arrays
                     {
                         while ((line = file.ReadLine()) != null)
                         {
+                            for(int i=0; i<=array.Length; i++)
+                            {
+                                array[i] = line;
+                            }
                             sw.Start();
                             
                         }

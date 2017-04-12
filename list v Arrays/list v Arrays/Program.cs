@@ -15,13 +15,16 @@ namespace list_v_Arrays
             string line;
             System.IO.StreamReader file = new System.IO.StreamReader("C:\\Users\\Brian\\Desktop\\dictionaries\\1k.txt");
             LinkedList<string> linked = new LinkedList<string>();
+            Array[] array;
             List<string> linked2 = new List<string>();
             Stopwatch sw = new Stopwatch();
-            string value = "search"; 
+           
+            string value = "search";
+            
             //inserting into linked list
             switch (value)
             {
-                case("insert"):
+                case("linked_insert"):
                     {
                         while ((line = file.ReadLine()) != null)
                         {
@@ -31,7 +34,7 @@ namespace list_v_Arrays
                         sw.Stop();
                         break;
                     }
-                case ("delete"):
+                case ("linked_delete"):
                     {
                         while ((line = file.ReadLine()) != null)
                         {
@@ -42,7 +45,7 @@ namespace list_v_Arrays
                         sw.Stop();
                         break;
                     }
-                case ("sort"):
+                case ("linked_sort"):
                     {
                         
                         while ((line = file.ReadLine()) != null)
@@ -60,7 +63,7 @@ namespace list_v_Arrays
                         }
                         break;
                     }
-                case ("search"):
+                case ("linked_search"):
                     {
                         while ((line = file.ReadLine()) != null)
                         {
@@ -74,6 +77,28 @@ namespace list_v_Arrays
                             linked.Find(word);
                         }
                         sw.Stop();
+                        break;
+                    }
+                case ("array_insert"):
+                    {
+                        while ((line = file.ReadLine()) != null)
+                        {
+                            sw.Start();
+                            array.
+                        }
+
+                        break;
+                    }
+                case ("array_delete"):
+                    {
+                        break;
+                    }
+                case ("array_search"):
+                    {
+                        break;
+                    }
+                case ("array_sort"):
+                    {
                         break;
                     }
             }

@@ -18,13 +18,18 @@ namespace list_v_Arrays
             Array[] array;
             List<string> linked2 = new List<string>();
             Stopwatch sw = new Stopwatch();
-           
-            string value = "search";
+
+
+            string structure = "linked";  //linked or array
+            string action = "insert";     //insert, delete, sort, search
+            string datatype = "string";  //string or int
+            string value = structure + "_"+ action+"_"+ datatype;
+            Console.WriteLine(value);
             
             //inserting into linked list
             switch (value)
             {
-                case("linked_insert"):
+                case("linked_insert_string"):
                     {
                         while ((line = file.ReadLine()) != null)
                         {
@@ -34,7 +39,7 @@ namespace list_v_Arrays
                         sw.Stop();
                         break;
                     }
-                case ("linked_delete"):
+                case ("linked_delete_string"):
                     {
                         while ((line = file.ReadLine()) != null)
                         {
@@ -45,7 +50,7 @@ namespace list_v_Arrays
                         sw.Stop();
                         break;
                     }
-                case ("linked_sort"):
+                case ("linked_sort_string"):
                     {
                         
                         while ((line = file.ReadLine()) != null)
@@ -63,7 +68,7 @@ namespace list_v_Arrays
                         }
                         break;
                     }
-                case ("linked_search"):
+                case ("linked_search_string"):
                     {
                         while ((line = file.ReadLine()) != null)
                         {
@@ -79,25 +84,25 @@ namespace list_v_Arrays
                         sw.Stop();
                         break;
                     }
-                case ("array_insert"):
+                case ("array_insert_string"):
                     {
                         while ((line = file.ReadLine()) != null)
                         {
                             sw.Start();
-                            array.
+                            
                         }
 
                         break;
                     }
-                case ("array_delete"):
+                case ("array_delete_string"):
                     {
                         break;
                     }
-                case ("array_search"):
+                case ("array_search_string"):
                     {
                         break;
                     }
-                case ("array_sort"):
+                case ("array_sort_string"):
                     {
                         break;
                     }

@@ -13,11 +13,11 @@ namespace list_v_Arrays
         static void Main(string[] args)
         {
             string line;
-            System.IO.StreamReader file = new System.IO.StreamReader("C:\\Users\\Brian\\Desktop\\dictionaries\\test.txt");
+            System.IO.StreamReader file = new System.IO.StreamReader("C:\\Users\\Brian\\Desktop\\dictionaries\\1k.txt");
             LinkedList<string> linked = new LinkedList<string>();
             List<string> linked2 = new List<string>();
             Stopwatch sw = new Stopwatch();
-            string value = "sort"; 
+            string value = "search"; 
             //inserting into linked list
             switch (value)
             {
@@ -66,7 +66,14 @@ namespace list_v_Arrays
                         {
                             linked.AddLast(line);
                         }
-                        linked.to
+                        linked2 = linked.ToList();
+
+                        foreach (string  word in linked2)
+                        {
+                            sw.Start();
+                            linked.Find(word);
+                        }
+                        sw.Stop();
                         break;
                     }
             }

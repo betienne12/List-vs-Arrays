@@ -23,7 +23,7 @@ namespace list_v_Arrays
 
 
             string structure = "array";  //linked or array
-            string action = "search";     //insert, delete, sort, search
+            string action = "sort";     //insert, delete, sort, search
             string datatype = "string";  //string or int
             string value = structure + "_" + action + "_" + datatype;
             Console.WriteLine(value);
@@ -168,7 +168,30 @@ namespace list_v_Arrays
                     }
                 case ("array_sort_string"):
                     {
+                        int i = 0;
+                        while ((line = file.ReadLine()) != null)
+                        {
 
+                            array[i] = line;
+                            i++;
+                        }
+                        string temp = null;
+                        sw.Start();
+                        for (int write = 0; write < array.Length; write++)
+                        {
+                            for (int sort = 0; sort < array.Length - 1; sort++)
+                            {
+                                if (array[sort][0] > array[sort + 1][0])
+                                {
+                                    temp = array[sort + 1];
+                                    array[sort + 1] = array[sort];
+                                    array[sort] = temp;
+                                }
+                            }
+                        }
+                        sw.Stop();
+                        foreach (string s in array)
+                            Console.WriteLine(s);
                         break;
                     }
             }

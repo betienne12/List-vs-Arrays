@@ -22,8 +22,8 @@ namespace list_v_Arrays
             Stopwatch sw = new Stopwatch();
 
 
-            string structure = "linked";  //linked or array
-            string action = "sort";     //insert, delete, sort, search
+            string structure = "array";  //linked or array
+            string action = "search";     //insert, delete, sort, search
             string datatype = "string";  //string or int
             string value = structure + "_" + action + "_" + datatype;
             Console.WriteLine(value);
@@ -144,6 +144,26 @@ namespace list_v_Arrays
                     }
                 case ("array_search_string"):
                     {
+                        int i = 0;
+                        string[] array_2 = new string[4];
+                        while ((line = file.ReadLine()) != null)
+                        {
+                            
+                            array[i] = line;
+                            i++;
+                        }
+                        array.CopyTo(array_2,0);
+
+                        for(int s=0; s<array.Length; s++)
+                        {
+                            if(array[s]==array_2[s])
+                            {
+                                sw.Start();
+                                Console.WriteLine("found");
+                            }
+                            
+                        }
+                        sw.Stop();
                         break;
                     }
                 case ("array_sort_string"):

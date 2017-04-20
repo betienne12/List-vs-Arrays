@@ -14,10 +14,10 @@ namespace list_v_Arrays
         {
             string line;
             //string file_size = "1k";  //test, 1k, 10k, 50k, 100k
-            string[] file_size = new string[4] { "1k", "10k", "50k", "100k" };
+            string[] file_size = new string[4] { "1k", "10k", "50k", "90k" };
             int z = 0;
-            string structure = "linked";  //linked or array
-            string action = "insert";     //insert, delete, sort, search
+            string structure = "array";  //linked or array
+            string action = "delete";     //insert, delete, sort, search
             string datatype = "string";  //string or int
             string condition = "random"; //normal or random
             string value = structure + "_" + action + "_" + datatype + "_" + condition;
@@ -146,24 +146,33 @@ namespace list_v_Arrays
                     case ("array_delete_string_normal"):
                         {
                             int i = 0;
-                            int x = 0;
+                           
                             while ((line = file.ReadLine()) != null)
                             {
                                 array[i] = line;
                                 i++;
 
                             }
-                            sw.Start();
-                            for (x = 0; x < array.Length; x++)
-                                array[x] = null;
+                            i = 0;
+                            while (i < array.Length)
+                            {
+                                sw.Start();
+                                for (int a =i; a < array.Length - 1; a++)
+                                {
+                                    // moving elements downwards, to fill the gap at [index]
+                                    array[a] = array[a + 1];
+                                }
+                                // finally, let's decrement Array's size by one
+                                Array.Resize(ref array, array.Length - 1);
+                                i++;
+                            }
                             sw.Stop();
-
                             break;
                         }
                     case ("array_search_string_normal"):
                         {
                             int i = 0;
-                            string[] array_2 = new string[4];
+                            string[] array_2 = new string[lines];
                             while ((line = file.ReadLine()) != null)
                             {
 
@@ -208,8 +217,7 @@ namespace list_v_Arrays
                                 }
                             }
                             sw.Stop();
-                            foreach (string s in array)
-                                Console.WriteLine(s);
+                           
                             break;
                         }
                     case ("array_insert_string_random"):
@@ -243,13 +251,20 @@ namespace list_v_Arrays
                             Random rnd = new Random();
                             int[] random_array = numbers.OrderBy(x => rnd.Next()).ToArray();
                             int i = 0;
-                            while ((line = file.ReadLine()) != null)
+                            while (i<random_array.Length)
                             {
                                 sw.Start();
-                                array[random_array[i]] = null;
+                                for (int a = random_array[i]; a < array.Length - 1; a++)
+                                {
+                                    // moving elements downwards, to fill the gap at [index]
+                                    array[a] = array[a + 1];
+                                }
+                                // finally, let's decrement Array's size by one
+                                Array.Resize(ref array, array.Length - 1);
                                 i++;
                             }
                             sw.Stop();
+                            
                             break;
                         }
                     case ("linked_insert_string_random"):

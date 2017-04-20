@@ -13,7 +13,7 @@ namespace list_v_Arrays
         static void Main(string[] args)
         {
             string line;
-            string file_size = "50k";  //test, 1k, 10k, 50k, 100k
+            string file_size = "1k";  //test, 1k, 10k, 50k, 100k
             string path = "C:\\Users\\Brian\\Desktop\\dictionaries\\" + file_size + ".txt";
             System.IO.StreamReader file = new System.IO.StreamReader("C:\\Users\\Brian\\Desktop\\dictionaries\\" + file_size + ".txt");
             int lines = File.ReadAllLines(path).Length;
@@ -30,8 +30,8 @@ namespace list_v_Arrays
             var requiredLine = System.IO.File.ReadLines(path).Skip(lineToRead - 1).First();
 
 
-            string structure = "array";  //linked or array
-            string action = "insert";     //insert, delete, sort, search
+            string structure = "linked";  //linked or array
+            string action = "delete";     //insert, delete, sort, search
             string datatype = "string";  //string or int
             string condition = "random"; //normal or random
             string value = structure + "_" + action + "_" + datatype + "_" + condition;
@@ -56,6 +56,7 @@ namespace list_v_Arrays
                         {
                             sw.Start();
                             linked.Remove(line);
+                            
                         }
 
                         sw.Stop();
@@ -245,21 +246,70 @@ namespace list_v_Arrays
                     }
                 case ("linked_insert_string_random"):
                     {
+                       
+                        
                         int[] numbers = new int[lines];
                         for (int j = 0; j < numbers.Length; j++)
                         {
                             numbers[j] = j;
                         }
+                       
                         Random rnd = new Random();
                         int[] random_array = numbers.OrderBy(x => rnd.Next()).ToArray();
+                       
+                        
+                        for (int j = 0; j <lines ; j++)
+                        {
+
+                            linked.AddLast(j.ToString());
+                        }
                         int i = 0;
                         while ((line = file.ReadLine()) != null)
                         {
                             sw.Start();
-                            linked.AddLast(line);
+                            linked.Find((random_array[i]).ToString()).Value = line;
                             i++;
                         }
                         sw.Stop();
+
+                        foreach (string item in linked)
+                        {
+                            Console.WriteLine(item);
+                        }
+                        
+                        break;
+                    }
+                case ("linked_delete_string_random"):
+                    {
+                        int[] numbers = new int[lines];
+                        for (int j = 0; j < numbers.Length; j++)
+                        {
+                            numbers[j] = j;
+                        }
+                       
+                        Random rnd = new Random();
+                        int[] random_array = numbers.OrderBy(x => rnd.Next()).ToArray();
+                       
+                        
+                        for (int j = 0; j <lines ; j++)
+                        {
+
+                            linked.AddLast(j.ToString());
+                        }
+                        int i = 0;
+                        while ((line = file.ReadLine()) != null)
+                        {
+                            sw.Start();
+                            linked.Remove((random_array[i]).ToString());
+                            i++;
+                        }
+                        sw.Stop();
+
+                        foreach (string item in linked)
+                        {
+                            Console.WriteLine(item);
+                        }
+                        
                         break;
                     }
                 default:

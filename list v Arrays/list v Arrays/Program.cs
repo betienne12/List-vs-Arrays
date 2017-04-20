@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
-
+using System.IO;
 
 namespace list_v_Arrays
 {
@@ -14,7 +14,7 @@ namespace list_v_Arrays
         {
             string line;
             string file_size = "Test_2";  //test, 1k, 10k, 50k, 100k
-
+            string path = "C:\\Users\\Brian\\Desktop\\dictionaries\\" + file_size + ".txt";
             System.IO.StreamReader file = new System.IO.StreamReader("C:\\Users\\Brian\\Desktop\\dictionaries\\" + file_size + ".txt");
             LinkedList<string> linked = new LinkedList<string>();
             string[] array = new string[4];
@@ -22,8 +22,8 @@ namespace list_v_Arrays
             Stopwatch sw = new Stopwatch();
 
 
-            string structure = "array";  //linked or array
-            string action = "sort";     //insert, delete, sort, search
+            string structure = "arr";  //linked or array
+            string action = "insert";     //insert, delete, sort, search
             string datatype = "string";  //string or int
             string value = structure + "_" + action + "_" + datatype;
             Console.WriteLine(value);
@@ -194,7 +194,78 @@ namespace list_v_Arrays
                             Console.WriteLine(s);
                         break;
                     }
+                default:
+                    {
+                        Console.WriteLine("dhjjgd");
+                        break;
+                    }
             }
+            
+            string struc = "array";  //linked or array
+            string op = "delete";     //insert, delete, sort, search
+            string type = "string";  //string or int
+            string q = struc + "_" + op+ "_" + type+"_"+"random";
+            int lines = File.ReadAllLines(path).Length;
+            Random rand = new Random();
+            int w = rand.Next(1, lines);
+            var lineToRead = w;
+            //Console.WriteLine("number is {0}", w);
+            var requiredLine = System.IO.File.ReadLines(path).Skip(lineToRead - 1).First();
+            //Console.WriteLine(requiredLine.ToString());
+            switch (q)
+            {
+                case ("array_insert_string_random"):
+                    {
+                        //Array Numbers = new Array[lines];
+                        
+                        int[] numbers = new int[lines];
+                        for (int j = 0; j < numbers.Length; j++)
+                        {
+                            numbers[j] = j;
+                        }
+                        Random rnd = new Random();
+                        int[] random_array = numbers.OrderBy(x => rnd.Next()).ToArray();
+                        int i = 0;
+                        while ((line = file.ReadLine()) != null)
+                        {
+                            sw.Start();
+                            array[random_array[i]] = line;
+                            i++;
+                        }
+                        sw.Stop();
+
+                        foreach (string item in array)
+                        {
+                            Console.WriteLine(item);
+                        }
+                        break;
+                    }
+                case ("array_delete_string_random"):
+                    {
+                        int[] numbers = new int[lines];
+                        for (int j = 0; j < numbers.Length; j++)
+                        {
+                            numbers[j] = j;
+                        }
+                        Random rnd = new Random();
+                        int[] random_array = numbers.OrderBy(x => rnd.Next()).ToArray();
+                        int i = 0;
+                        while ((line = file.ReadLine()) != null)
+                        {
+                            sw.Start();
+                            array[random_array[i]] = null;
+                            i++;
+                        }
+                        sw.Stop();
+
+                        foreach (string item in array)
+                        {
+                            Console.WriteLine(item);
+                        }
+                        break;
+                    }
+            }
+
 
 
                     string ExecutionTimeTaken = string.Format("Minutes :{0}\nSeconds :{1}\n Mili seconds :{2}", sw.Elapsed.Minutes, sw.Elapsed.Seconds, sw.Elapsed.TotalMilliseconds);

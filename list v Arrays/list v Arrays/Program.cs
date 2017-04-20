@@ -13,25 +13,34 @@ namespace list_v_Arrays
         static void Main(string[] args)
         {
             string line;
-            string file_size = "Test_2";  //test, 1k, 10k, 50k, 100k
+            string file_size = "50k";  //test, 1k, 10k, 50k, 100k
             string path = "C:\\Users\\Brian\\Desktop\\dictionaries\\" + file_size + ".txt";
             System.IO.StreamReader file = new System.IO.StreamReader("C:\\Users\\Brian\\Desktop\\dictionaries\\" + file_size + ".txt");
+            int lines = File.ReadAllLines(path).Length;
             LinkedList<string> linked = new LinkedList<string>();
-            string[] array = new string[4];
+            string[] array = new string[lines];
             List<string> linked2 = new List<string>();
             Stopwatch sw = new Stopwatch();
 
+           
+            Random rand = new Random();
+            int w = rand.Next(1, lines);
+            var lineToRead = w;
+            //Console.WriteLine("number is {0}", w);
+            var requiredLine = System.IO.File.ReadLines(path).Skip(lineToRead - 1).First();
 
-            string structure = "arr";  //linked or array
+
+            string structure = "array";  //linked or array
             string action = "insert";     //insert, delete, sort, search
             string datatype = "string";  //string or int
-            string value = structure + "_" + action + "_" + datatype;
+            string condition = "random"; //normal or random
+            string value = structure + "_" + action + "_" + datatype + "_" + condition;
             Console.WriteLine(value);
 
             //inserting into linked list
             switch (value)
             {
-                case ("linked_insert_string"):
+                case ("linked_insert_string_normal"):
                     {
                         while ((line = file.ReadLine()) != null)
                         {
@@ -41,7 +50,7 @@ namespace list_v_Arrays
                         sw.Stop();
                         break;
                     }
-                case ("linked_delete_string"):
+                case ("linked_delete_string_normal"):
                     {
                         while ((line = file.ReadLine()) != null)
                         {
@@ -52,7 +61,7 @@ namespace list_v_Arrays
                         sw.Stop();
                         break;
                     }
-                case ("linked_sort_string"):
+                case ("linked_sort_string_normal"):
                     {
 
                         while ((line = file.ReadLine()) != null)
@@ -97,7 +106,7 @@ namespace list_v_Arrays
                         break;
 
                     }
-                case ("linked_search_string"):
+                case ("linked_search_string_normal"):
                     {
                         while ((line = file.ReadLine()) != null)
                         {
@@ -113,7 +122,7 @@ namespace list_v_Arrays
                         sw.Stop();
                         break;
                     }
-                case ("array_insert_string"):
+                case ("array_insert_string_normal"):
                     {
                         int i = 0;
                         while ((line = file.ReadLine()) != null)
@@ -125,7 +134,7 @@ namespace list_v_Arrays
                         sw.Stop();
                         break;
                     }
-                case ("array_delete_string"):
+                case ("array_delete_string_normal"):
                     {
                         int i = 0;
                         int x = 0;
@@ -142,7 +151,7 @@ namespace list_v_Arrays
 
                         break;
                     }
-                case ("array_search_string"):
+                case ("array_search_string_normal"):
                     {
                         int i = 0;
                         string[] array_2 = new string[4];
@@ -166,7 +175,7 @@ namespace list_v_Arrays
                         sw.Stop();
                         break;
                     }
-                case ("array_sort_string"):
+                case ("array_sort_string_normal"):
                     {
                         int i = 0;
                         while ((line = file.ReadLine()) != null)
@@ -194,30 +203,10 @@ namespace list_v_Arrays
                             Console.WriteLine(s);
                         break;
                     }
-                default:
-                    {
-                        Console.WriteLine("dhjjgd");
-                        break;
-                    }
-            }
-            
-            string struc = "array";  //linked or array
-            string op = "delete";     //insert, delete, sort, search
-            string type = "string";  //string or int
-            string q = struc + "_" + op+ "_" + type+"_"+"random";
-            int lines = File.ReadAllLines(path).Length;
-            Random rand = new Random();
-            int w = rand.Next(1, lines);
-            var lineToRead = w;
-            //Console.WriteLine("number is {0}", w);
-            var requiredLine = System.IO.File.ReadLines(path).Skip(lineToRead - 1).First();
-            //Console.WriteLine(requiredLine.ToString());
-            switch (q)
-            {
                 case ("array_insert_string_random"):
                     {
                         //Array Numbers = new Array[lines];
-                        
+
                         int[] numbers = new int[lines];
                         for (int j = 0; j < numbers.Length; j++)
                         {
@@ -233,11 +222,6 @@ namespace list_v_Arrays
                             i++;
                         }
                         sw.Stop();
-
-                        foreach (string item in array)
-                        {
-                            Console.WriteLine(item);
-                        }
                         break;
                     }
                 case ("array_delete_string_random"):
@@ -257,16 +241,35 @@ namespace list_v_Arrays
                             i++;
                         }
                         sw.Stop();
-
-                        foreach (string item in array)
+                        break;
+                    }
+                case ("linked_insert_string_random"):
+                    {
+                        int[] numbers = new int[lines];
+                        for (int j = 0; j < numbers.Length; j++)
                         {
-                            Console.WriteLine(item);
+                            numbers[j] = j;
                         }
+                        Random rnd = new Random();
+                        int[] random_array = numbers.OrderBy(x => rnd.Next()).ToArray();
+                        int i = 0;
+                        while ((line = file.ReadLine()) != null)
+                        {
+                            sw.Start();
+                            linked.AddLast(line);
+                            i++;
+                        }
+                        sw.Stop();
+                        break;
+                    }
+                default:
+                    {
+                        Console.WriteLine("invalid case");
                         break;
                     }
             }
-
-
+            
+            
 
                     string ExecutionTimeTaken = string.Format("Minutes :{0}\nSeconds :{1}\n Mili seconds :{2}", sw.Elapsed.Minutes, sw.Elapsed.Seconds, sw.Elapsed.TotalMilliseconds);
                     int c = linked.Count();

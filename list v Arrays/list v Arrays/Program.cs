@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
@@ -16,10 +17,10 @@ namespace list_v_Arrays
             //string file_size = "1k";  //test, 1k, 10k, 50k, 100k
             string[] file_size = new string[4] { "1k", "10k", "50k", "90k" };
             int z = 0;
-            string structure = "array";  //linked or array
-            string action = "delete";     //insert, delete, sort, search
+            string structure = "linked";  //linked or array
+            string action = "search";     //insert, delete, sort, search
             string datatype = "string";  //string or int
-            string condition = "random"; //normal or random
+            string condition = "normal"; //normal or random
             string value = structure + "_" + action + "_" + datatype + "_" + condition;
             System.IO.StreamWriter output = new StreamWriter("C:\\Users\\Brian\\Desktop\\dictionaries\\" + value + ".txt", true);
             while (z < file_size.Length)
@@ -62,12 +63,21 @@ namespace list_v_Arrays
                         {
                             while ((line = file.ReadLine()) != null)
                             {
+                                
+                                linked.AddLast(line);
+                            }
+                            file.Close();
+                            System.IO.StreamReader test = new System.IO.StreamReader("C:\\Users\\Brian\\Desktop\\dictionaries\\" + file_size[z] + ".txt");
+
+                            while ((line = test.ReadLine()) != null)
+                            {
                                 sw.Start();
                                 linked.Remove(line);
 
                             }
-
+                            //linked delete
                             sw.Stop();
+                            test.Close();
                             break;
                         }
                     case ("linked_sort_string_normal"):
@@ -122,11 +132,15 @@ namespace list_v_Arrays
                                 linked.AddLast(line);
                             }
                             linked2 = linked.ToList();
-
-                            foreach (string word in linked2)
+                            Random rnd = new Random();
+                            List<string> random_list = linked2.OrderBy(x => rnd.Next()).ToList();
+                            sw.Start();
+                            foreach (string word in random_list)
                             {
-                                sw.Start();
+                                
                                 linked.Find(word);
+                                Console.WriteLine("found");
+                               
                             }
                             sw.Stop();
                             break;
@@ -141,6 +155,47 @@ namespace list_v_Arrays
                                 i++;
                             }
                             sw.Stop();
+                            break;
+                        }
+                    case ("listarray_insert_string_normal"):
+                     {
+                            List<string> list = new List<string>();
+                            //string[] arr;
+                            while ((line = file.ReadLine()) != null)
+                            {
+                                sw.Start();
+                                list.Add(line);
+                                
+                            }
+                        
+                            string [] arr = list.ToArray();
+                            sw.Stop();
+                            break;
+                        }
+                    case ("listarray_delete_string_normal"):
+                        {
+                            int i = 0;
+                            List<string> list = new List<string>();
+                            while ((line = file.ReadLine()) != null)
+                            {
+                                sw.Start();
+                                list.Add(line);
+
+                            }
+                            
+                            i = 0;
+                            file.Close();
+                            System.IO.StreamReader test = new System.IO.StreamReader("C:\\Users\\Brian\\Desktop\\dictionaries\\" + file_size[z] + ".txt");
+
+                            while ((line = test.ReadLine()) != null)
+                            {
+                                sw.Start();
+                                list.Remove(line);
+                            }
+
+                            string[] arr = list.ToArray();
+                            sw.Stop();
+                            test.Close();
                             break;
                         }
                     case ("array_delete_string_normal"):
@@ -172,23 +227,30 @@ namespace list_v_Arrays
                     case ("array_search_string_normal"):
                         {
                             int i = 0;
+
                             string[] array_2 = new string[lines];
+                            
+
                             while ((line = file.ReadLine()) != null)
                             {
 
                                 array[i] = line;
                                 i++;
                             }
-                            array.CopyTo(array_2, 0);
-
+                            Random rnd = new Random();
+                            string[] random_array = array.OrderBy(x => rnd.Next()).ToArray();
+                            
+                            //array.CopyTo(array_2, 0);
+                            sw.Start();
                             for (int s = 0; s < array.Length; s++)
                             {
-                                if (array[s] == array_2[s])
+                                for (int x=0; x<random_array.Length; x++ )
                                 {
-                                    sw.Start();
-                                    Console.WriteLine("found");
+                                    if (array[s] == random_array[x])
+                                    {
+                                        Console.WriteLine("found");
+                                    }
                                 }
-
                             }
                             sw.Stop();
                             break;
